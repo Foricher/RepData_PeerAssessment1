@@ -90,11 +90,11 @@ plot(activity.steps.interval$steps, type = "l", main = "Average daily activity",
 
 
 ```r
- which.max(activity.steps.interval$steps)
+ activity.steps.interval[which.max(activity.steps.interval$steps),]$interval
 ```
 
 ```
-## [1] 104
+## [1] 835
 ```
 
 
