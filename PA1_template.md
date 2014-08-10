@@ -49,7 +49,8 @@ summary(activity)
 
 ```r
 activity.steps.day <- aggregate(steps ~ date, activity, sum)
-barplot(activity.steps.day$steps, names.arg = activity.steps.day$date, main = "Total number of steps taken per day", xlab = "Date", ylab = "Total number of steps")
+
+hist(activity.steps.day$steps,  col = "cyan",  main = "Total number of steps taken per day", xlab = "Number of steps per day", ylab = "Frequency of number of steps", breaks = 20, xlim= c(0,25000),ylim= c(0,10) )
 ```
 
 ![plot of chunk histogram](figure/histogram.png) 
@@ -58,7 +59,7 @@ barplot(activity.steps.day$steps, names.arg = activity.steps.day$date, main = "T
 
 
 ```r
-mean(activity.steps.day$steps)
+mean(activity.steps.day$steps,na.rm = TRUE)
 ```
 
 ```
@@ -66,7 +67,7 @@ mean(activity.steps.day$steps)
 ```
 
 ```r
-median(activity.steps.day$steps)
+median(activity.steps.day$steps,na.rm = TRUE)
 ```
 
 ```
@@ -128,15 +129,16 @@ filled.activity <- filled.activity[, c(1:3)]
 
 
 ```r
-steps.date <- aggregate(steps ~ date, data = filled.activity, FUN = sum)
-barplot(steps.date$steps, names.arg = steps.date$date, main="Total number of steps taken per day", xlab = "Date", ylab = "Total number of steps")
+filled.steps.day <- aggregate(steps ~ date, data = filled.activity, FUN = sum)
+
+hist(filled.steps.day$steps, col = "cyan", main = "Total number of steps taken per day", xlab = "Total number of steps per day", ylab = "Frequency of number of steps", breaks = 20, xlim= c(0,25000),ylim= c(0,20))
 ```
 
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4.png) 
 
 
 ```r
-mean(steps.date$steps)
+mean(filled.steps.day$steps)
 ```
 
 ```
@@ -144,14 +146,14 @@ mean(steps.date$steps)
 ```
 
 ```r
-median(steps.date$steps)
+median(filled.steps.day$steps)
 ```
 
 ```
 ## [1] 10766
 ```
 
-There is not a lot of differences on mean and median with or wihtout missing values.
+There is not a lot of differences on mean and median with or without missing values.
 The impact of the missing data is low, on the estimates of the total daily number of steps.
 
 
