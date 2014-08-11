@@ -1,7 +1,6 @@
 ---
 output:
-  html_document:
-    keep_md: yes
+  html_document: default
 ---
 # Reproducible Research: Peer Assessment 1
 

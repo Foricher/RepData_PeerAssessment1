@@ -1,3 +1,7 @@
+---
+output:
+  html_document: default
+---
 # Reproducible Research: Peer Assessment 1
 
 The variables included in this dataset are:
@@ -55,7 +59,7 @@ hist(activity.steps.day$steps,  col = "cyan",  main = "Total number of steps tak
      xlim= c(0,25000),ylim= c(0,10) )
 ```
 
-![plot of chunk histogram](./PA1_template_files/figure-html/histogram.png) 
+![plot of chunk histogram](figure/histogram.png) 
 
 * **Calculate and report the mean and median total number of steps taken per day**
 
@@ -96,7 +100,7 @@ plot(activity.steps.interval$steps, type = "l", main = "Average daily activity",
      xlab = "5-minute interval", ylab = "Average number of steps ")
 ```
 
-![plot of chunk average](./PA1_template_files/figure-html/average.png) 
+![plot of chunk average](figure/average.png) 
 
 * **Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?**
 
@@ -155,7 +159,7 @@ hist(filled.steps.day$steps, col = "cyan", main = "Total number of steps taken p
      breaks = 20, xlim= c(0,25000),ylim= c(0,20))
 ```
 
-![plot of chunk unnamed-chunk-4](./PA1_template_files/figure-html/unnamed-chunk-4.png) 
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4.png) 
 
 
 ```r
@@ -221,7 +225,7 @@ xyplot(steps ~ interval | daytype, data = activity.means, type = "l", layout = c
        ylab = "Average number of Steps")
 ```
 
-![plot of chunk unnamed-chunk-7](./PA1_template_files/figure-html/unnamed-chunk-7.png) 
+![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7.png) 
 
 
 The maximum average number of steps during weekdays is higher than that during the weekend.But, on average, there are more activities during the weekend. 
