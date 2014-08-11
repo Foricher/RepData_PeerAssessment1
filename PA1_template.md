@@ -50,16 +50,20 @@ summary(activity)
 ```r
 activity.steps.day <- aggregate(steps ~ date, activity, sum)
 
-hist(activity.steps.day$steps,  col = "cyan",  main = "Total number of steps taken per day", xlab = "Number of steps per day", ylab = "Frequency of number of steps", breaks = 20, xlim= c(0,25000),ylim= c(0,10) )
+hist(activity.steps.day$steps,  col = "cyan",  main = "Total number of steps taken per day", 
+     xlab = "Number of steps per day", ylab = "Frequency of number of steps", breaks = 20, 
+     xlim= c(0,25000),ylim= c(0,10) )
 ```
 
-![plot of chunk histogram](figure/histogram.png) 
+![plot of chunk histogram](./PA1_template_files/figure-html/histogram.png) 
 
 * **Calculate and report the mean and median total number of steps taken per day**
 
 
 ```r
-mean(activity.steps.day$steps,na.rm = TRUE)
+#calculate the mean
+steps.mean <- mean(activity.steps.day$steps,na.rm = TRUE)
+steps.mean
 ```
 
 ```
@@ -67,12 +71,19 @@ mean(activity.steps.day$steps,na.rm = TRUE)
 ```
 
 ```r
-median(activity.steps.day$steps,na.rm = TRUE)
+#calculate the median
+steps.median <- median(activity.steps.day$steps,na.rm = TRUE)
+steps.median
 ```
 
 ```
 ## [1] 10765
 ```
+
+The mean of total number of steps taken per day is **1.0766 &times; 10<sup>4</sup>**
+
+The median of total number of steps taken per day is **10765**
+
 
 ## What is the average daily activity pattern?
 
@@ -81,21 +92,25 @@ median(activity.steps.day$steps,na.rm = TRUE)
 
 ```r
 activity.steps.interval <- aggregate(steps ~ interval, activity, mean)
-plot(activity.steps.interval$steps, type = "l", main = "Average daily activity", xlab = "5-minute interval", ylab = "Average number of steps ")
+plot(activity.steps.interval$steps, type = "l", main = "Average daily activity",
+     xlab = "5-minute interval", ylab = "Average number of steps ")
 ```
 
-![plot of chunk average](figure/average.png) 
+![plot of chunk average](./PA1_template_files/figure-html/average.png) 
 
 * **Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?**
 
 
 ```r
- activity.steps.interval[which.max(activity.steps.interval$steps),]$interval
+max.interval <- activity.steps.interval[which.max(activity.steps.interval$steps),]$interval
+max.interval
 ```
 
 ```
 ## [1] 835
 ```
+
+The 5-minute interval containing he maximum number of steps is **835**
 
 
 ## Imputing missing values
@@ -104,12 +119,16 @@ plot(activity.steps.interval$steps, type = "l", main = "Average daily activity",
 
 
 ```r
-sum(is.na(activity))
+na.numbers <- sum(is.na(activity))
+na.numbers
 ```
 
 ```
 ## [1] 2304
 ```
+
+The total number of missing values in the dataset is **2304**
+
 
 * **Devise a strategy for filling in all of the missing values in the dataset.**
 
@@ -131,14 +150,17 @@ filled.activity <- filled.activity[, c(1:3)]
 ```r
 filled.steps.day <- aggregate(steps ~ date, data = filled.activity, FUN = sum)
 
-hist(filled.steps.day$steps, col = "cyan", main = "Total number of steps taken per day", xlab = "Total number of steps per day", ylab = "Frequency of number of steps", breaks = 20, xlim= c(0,25000),ylim= c(0,20))
+hist(filled.steps.day$steps, col = "cyan", main = "Total number of steps taken per day", 
+     xlab = "Total number of steps per day", ylab = "Frequency of number of steps", 
+     breaks = 20, xlim= c(0,25000),ylim= c(0,20))
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4.png) 
+![plot of chunk unnamed-chunk-4](./PA1_template_files/figure-html/unnamed-chunk-4.png) 
 
 
 ```r
-mean(filled.steps.day$steps)
+filled.steps.mean <- mean(filled.steps.day$steps)
+filled.steps.mean
 ```
 
 ```
@@ -146,12 +168,18 @@ mean(filled.steps.day$steps)
 ```
 
 ```r
-median(filled.steps.day$steps)
+filled.steps.median <- median(filled.steps.day$steps)
+filled.steps.median
 ```
 
 ```
 ## [1] 10766
 ```
+
+The mean of total number of steps taken per day with imputing missing values is **1.0766 &times; 10<sup>4</sup>**
+
+The median of total number of steps taken per day imputing missing values is **1.0766 &times; 10<sup>4</sup>**
+
 
 There is not a lot of differences on mean and median with or without missing values.
 The impact of the missing data is low, on the estimates of the total daily number of steps.
@@ -188,10 +216,12 @@ filled.activity$daytype <- as.factor(sapply(filled.activity$date, day.type))
 activity.means <- aggregate(steps ~ interval + daytype, data=filled.activity, mean)
 
 library(lattice)
-xyplot(steps ~ interval | daytype, data = activity.means, type = "l", layout = c(1, 2), main="Activity between weekdays and weekends", xlab = "5-minute interval" , ylab = "Average number of Steps")
+xyplot(steps ~ interval | daytype, data = activity.means, type = "l", layout = c(1, 2), 
+       main="Activity between weekdays and weekends", xlab = "5-minute interval" , 
+       ylab = "Average number of Steps")
 ```
 
-![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7.png) 
+![plot of chunk unnamed-chunk-7](./PA1_template_files/figure-html/unnamed-chunk-7.png) 
 
 
 The maximum average number of steps during weekdays is higher than that during the weekend.But, on average, there are more activities during the weekend. 
